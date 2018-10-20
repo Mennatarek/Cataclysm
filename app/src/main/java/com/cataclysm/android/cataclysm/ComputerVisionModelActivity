@@ -1,0 +1,44 @@
+package com.example.menna.myapplication;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+
+import org.datavec.image.loader.NativeImageLoader;
+import org.deeplearning4j.nn.modelimport.keras.KerasModelImport;
+import org.deeplearning4j.nn.modelimport.keras.exceptions.InvalidKerasConfigurationException;
+import org.deeplearning4j.nn.modelimport.keras.exceptions.UnsupportedKerasConfigurationException;
+import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.io.ClassPathResource;
+
+import java.io.IOException;
+
+public class MainActivity extends AppCompatActivity {
+    long width =200;
+    long height =200;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        try {
+            String simpleMlp = new ClassPathResource(
+                    "model.h5").getFile().getPath();
+            MultiLayerNetwork model = KerasModelImport.
+                    importKerasSequentialModelAndWeights(simpleMlp);
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            NativeImageLoader loader = new NativeImageLoader(height, width, 3);
+            INDArray image = loader.asMatrix(classloader.getResourceAsStream("fire.png"));
+            Log.e("prediction : ",model.predict(image).toString());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidKerasConfigurationException e) {
+            e.printStackTrace();
+        } catch (UnsupportedKerasConfigurationException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
