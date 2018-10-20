@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Cataclysm</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">Xi5t22qi7AoQ1a95cUri3c67a</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">hFy2uU5WU7pQY2QaILX2k0w0RjbjG99gBEyO1bSlratnkA8Hhb</string>
+    <string name="drawer_open">drawer open</string>
+    <string name="drawer_close">drawer close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
